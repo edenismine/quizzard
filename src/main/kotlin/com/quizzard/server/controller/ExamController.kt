@@ -14,7 +14,7 @@ class ExamController(val repository: ExamRepository) {
     @RequestMapping("/api/exam", method = [RequestMethod.POST])
     fun new(@RequestBody exam: Exam) = repository.save(exam)
 
-    @RequestMapping("/api/exam/{id}", method = [RequestMethod.POST])
+    @RequestMapping("/api/exam/{id}", method = [RequestMethod.PUT])
     fun update(@RequestBody exam: Exam, @RequestParam id: UUID) = repository.save(exam.copy(id = id))
 
     @RequestMapping("/api/exam/{id}", method = [RequestMethod.DELETE])
