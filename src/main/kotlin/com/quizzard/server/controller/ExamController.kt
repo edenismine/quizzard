@@ -2,15 +2,22 @@ package com.quizzard.server.controller
 
 import com.quizzard.server.domain.Exam
 import com.quizzard.server.repository.ExamRepository
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 class ExamController(val repository: ExamRepository) {
 
     @RequestMapping("/api/exam", method = [RequestMethod.GET])
-    fun findAll() =  repository.findAll()
+    fun findAll(): List<Exam> = repository.findAll()
 
     @RequestMapping("/api/exam", method = [RequestMethod.POST])
-    fun update(@RequestBody exam : Exam) =  repository.save(exam)
+    fun new(@RequestBody exam: Exam) = repository.save(exam)
+
+    @RequestMapping("/api/exam/{id}", method = [RequestMethod.POST])
+    fun update(@RequestBody exam: Exam, @RequestParam id: UUID) = repository.save(exam.copy(id = id))
+
+    @RequestMapping("/api/exam/{id}", method = [RequestMethod.DELETE])
+    fun delete(@RequestParam id: UUID) = repository.deleteById(id)
+
 }
