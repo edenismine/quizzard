@@ -10,3 +10,5 @@ data class Exam(@Id val id: UUID = UUID.randomUUID(), val name: String, val ques
 data class Question(val id : Int, val question: String, val answers: List<Answer> )
 
 data class Answer(val id: Int, val answer: String, val isValid: Boolean)
+
+data class ExamForm(val name: String, val questions: List<Question>)
